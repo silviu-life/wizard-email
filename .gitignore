@@ -1,0 +1,8 @@
+# Date generate la rulare, doar la rădăcina proiectului — niciodată în git.
+# Ancorate cu / ca să NU se aplice la .claude/skills/mail-init/assets/{exemple,templates}/
+/firma/
+/oferte/
+/templates/
+/reguli/
+/contacte/
+__pycache__/
