@@ -12,6 +12,7 @@ claude
 > /mail init /cale/catre/documente     # folder, PDF-uri, URL-uri; fără argument → interviu
 > /mail sync                            # inbox → contacte/<email>/
 > /mail classify --toate
+> /mail process                         # pe rând: ce a zis, cine e, ce-i răspund
 > /mail draft ana@firma.ro "răspunde la întrebarea de preț"
 > /mail send ana@firma.ro
 ```
@@ -24,7 +25,8 @@ schimbă doar `mail-sync` și `mail-send`.
 | Comandă | Ce face |
 |---|---|
 | `/mail init [surse]` | construiește `firma/`, `oferte/`, `reguli/`, `templates/` |
-| `/mail sync [query]` | Gmail → `contacte/<email>/profile.md` + `istoric.md` |
+| `/mail sync [--zile N] [query]` | Gmail (default 360 zile, fără marketing) → `contacte/<email>/` |
+| `/mail process [<email> \| --toate]` | emailurile pe rând: ce a zis, cine e, variante de răspuns |
 | `/mail classify <email> \| --toate` | tip, segment, stadiu, personalitate |
 | `/mail draft <email\|thread> [intenție]` | un Draft în Gmail, din template + ofertă |
 | `/mail send <draft-id\|email>` | trimite un draft, după confirmare |

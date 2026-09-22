@@ -30,7 +30,7 @@ Cronologic, o intrare per eveniment, cea mai veche sus. Format fix al titlului:
 ```
 ## YYYY-MM-DD · <eveniment> · <descriere scurtă> · <referințe>
 ```
-- `eveniment`: `primit` · `trimis` · `draft` · `clasificat` · `nota` · `call`
+- `eveniment`: `primit` · `trimis` · `draft` · `procesat` (decizie luată în `mail-process` fără draft: notă sau ignorat) · `clasificat` · `nota` · `call`
 - referințe: `thread:<id>`, `msg:<id>`, `draft:<id>`, `template:<id>`, `oferta:<id>` — câte se aplică
 - sub titlu: 1-3 linii de rezumat. La `trimis` se notează și schimbarea de stadiu: `→ stadiu: oferta-trimisa`
 
