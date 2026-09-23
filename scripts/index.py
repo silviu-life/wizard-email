@@ -7,6 +7,7 @@ Exit 1 dacă există probleme de validare (câmp obligatoriu lipsă sau valoare 
 """
 import re, sys, shutil, tempfile
 from pathlib import Path
+sys.stdout.reconfigure(encoding="utf-8")  # Windows: consola implicită e cp1252 și cade la ⚠/ă
 
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / ".claude/skills/mail-init/assets"

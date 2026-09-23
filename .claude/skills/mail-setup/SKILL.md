@@ -18,7 +18,8 @@ Test (singurul considerat valid, pentru că stub-ul Microsoft Store poate exista
 ```bash
 python3 -c "import sys; assert sys.version_info >= (3, 8); print(sys.version.split()[0])"
 ```
-Exit 0 → `Python: OK (<versiune>)`, sari la Pas 3. Altfel, după OS:
+Exit 0 → `Python: OK (<versiune>)`, sari la Pas 3. Altfel, după OS. Orice STOP din pasul ăsta afișează
+întâi raportul (Pas 5) cu `Python: FIX (<ce faci>)`, `Gmail: —`, `Proiect: —` (se verifică la rularea următoare).
 
 **Windows**
 1. Dacă `py -3 --version` sau `python --version` (versiune ≥ 3.8, nu mesajul „Python was not found")
@@ -39,10 +40,14 @@ Exit 0 → `Python: OK (<versiune>)`, sari la Pas 3. Altfel, după OS:
    din nou și rulează iar `/mail setup`." STOP.
 
 **Mac**
+- Pe un Mac nou, testul poate deschide fereastra Apple „install the command line developer tools". Spune-i:
+  „Dacă a apărut o fereastră care îți cere să instalezi Command Line Tools, apasă Install. Durează 10-20 de
+  minute și aduce și Python. Când termină, redeschide Claude Code și rulează iar `/mail setup`." STOP.
+  Dacă a apăsat Cancel sau fereastra n-a apărut, continuă mai jos.
 - `brew --version` merge → `brew install python`, apoi reia testul.
 - Fără Homebrew → deschide `https://www.python.org/downloads/macos/` (`open <url>`), spune-i să descarce
-  „macOS 64-bit universal2 installer", să-l ruleze cu Next până la capăt, apoi să redeschidă Claude Code și
-  să ruleze iar `/mail setup`. STOP.
+  „macOS 64-bit universal2 installer", să-l ruleze cu Continue, Agree, Install și parola Mac-ului, apoi să
+  redeschidă Claude Code și să ruleze iar `/mail setup`. STOP.
 
 **Linux** → `sudo apt install -y python3` (sau managerul distribuției), reia testul.
 
@@ -66,8 +71,8 @@ eroare și sugestia: „Descarcă din nou ZIP-ul din lecție și dezarhivează-l
 Exact trei linii, apoi următorul pas:
 ```
 Python: OK|FIX (<detaliu>)
-Gmail: OK|FIX
-Proiect: OK|FIX
+Gmail: OK|FIX|—
+Proiect: OK|FIX|—
 ```
 Toate OK → „Calculatorul e gata. Următorul pas: `/mail init` — construim profilul firmei și vocea ta."
 Dacă `firma/profil.md` există deja → „Sistemul e deja inițializat. Poți rula `/mail sync`."
