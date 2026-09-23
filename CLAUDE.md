@@ -20,4 +20,4 @@ Sistem de email organizat pe contacte. Un skill = un verb. Comenzi: `/mail <verb
 6. Corpul emailului trimis către Gmail e text simplu: fără Markdown, fără `**`, fără `#`.
 
 ## Dacă `firma/profil.md` nu există
-Sistemul nu e inițializat. Rulează `/mail init`.
+Sistemul nu e inițializat. Rulează `/mail setup`, apoi `/mail init`.

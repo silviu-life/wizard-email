@@ -1,6 +1,6 @@
 ---
 name: mail
-description: Orchestratorul sistemului de email pe contacte. Folosește la `/mail <verb>` — init, sync, process, classify, draft, send, followup, campaign — sau când utilizatorul spune „citește inbox-ul", „cine mi-a scris", „ce am de răspuns", „procesează emailurile", „răspunde-i lui X", „trimite oferta", „fă follow-up", „campanie pe clienți", „inițializează sistemul de email", check inbox, reply to, send offer, follow up, email campaign. Fără verb sau verb necunoscut → listează comenzile. Nu face nimic singur; rutează spre skill-ul `mail-<verb>`.
+description: Orchestratorul sistemului de email pe contacte. Folosește la `/mail <verb>` — setup, init, sync, process, classify, draft, send, followup, campaign — sau când utilizatorul spune „citește inbox-ul", „cine mi-a scris", „ce am de răspuns", „procesează emailurile", „răspunde-i lui X", „trimite oferta", „fă follow-up", „campanie pe clienți", „inițializează sistemul de email", „instalează ce trebuie", check inbox, reply to, send offer, follow up, email campaign. Fără verb sau verb necunoscut → listează comenzile. Nu face nimic singur; rutează spre skill-ul `mail-<verb>`.
 ---
 
 # /mail — orchestrator
@@ -9,6 +9,7 @@ Un skill = un verb. Tu doar rutezi.
 
 | Comandă | Ce face | Skill |
 |---|---|---|
+| `/mail setup` | verifică/instalează Python, verifică Gmail, validează proiectul | `mail-setup` |
 | `/mail init [surse...]` | construiește `firma/`, `oferte/`, `reguli/`, `templates/` din surse sau interviu | `mail-init` |
 | `/mail sync [--zile N] [query]` | citește Gmail (default 360 zile, fără marketing) → `contacte/<email>/` | `mail-sync` |
 | `/mail process [<email> \| --toate]` | emailurile pe rând: ce a zis, cine e, variante de răspuns | `mail-process` |
@@ -21,7 +22,7 @@ Un skill = un verb. Tu doar rutezi.
 ## Pași
 
 1. Fără verb sau verb necunoscut → afișează tabelul de mai sus și oprește-te.
-2. Verb ≠ `init` și `firma/profil.md` nu există → spune „Sistemul nu e inițializat" și propune `/mail init`. Oprește-te.
+2. Verb ∉ {`setup`, `init`} și `firma/profil.md` nu există → spune „Sistemul nu e inițializat" și propune `/mail setup`, apoi `/mail init`. Oprește-te.
 3. Citește `.claude/skills/mail-<verb>/SKILL.md` și urmează-l exact, cu argumentele primite.
 
 Regulile globale sunt în `CLAUDE.md` (rădăcina proiectului). Se aplică tuturor verbelor.

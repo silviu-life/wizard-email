@@ -9,6 +9,7 @@ personalizate din template-urile și ofertele firmei. Trimiterea e un pas separa
 ```
 cd email-ai
 claude
+> /mail setup                           # instalează ce lipsește, verifică Gmail
 > /mail init /cale/catre/documente     # folder, PDF-uri, URL-uri; fără argument → interviu
 > /mail sync                            # inbox → contacte/<email>/
 > /mail classify --toate
@@ -24,6 +25,7 @@ schimbă doar `mail-sync` și `mail-send`.
 
 | Comandă | Ce face |
 |---|---|
+| `/mail setup` | Python + Gmail + proiect verificate; predă la /mail init |
 | `/mail init [surse]` | construiește `firma/`, `oferte/`, `reguli/`, `templates/` |
 | `/mail sync [--zile N] [query]` | Gmail (default 360 zile, fără marketing) → `contacte/<email>/` |
 | `/mail process [<email> \| --toate]` | emailurile pe rând: ce a zis, cine e, variante de răspuns |
