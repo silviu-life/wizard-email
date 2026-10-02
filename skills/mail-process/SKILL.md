@@ -46,14 +46,14 @@ Prima variantă e recomandarea ta, cu un motiv de 5-10 cuvinte.
 
 ## Pas 3 — alegerea (AskUserQuestion, o singură întrebare per email)
 
-Textul scris înaintea unui tool call e comprimat de Claude Code într-un rezumat de o linie, deci
-blocurile de la Pas 2 NU se scriu în chat: intră în AskUserQuestion.
-- `question`: „<Nume> — ce a spus: <rezumat de o linie>. Ce-i răspunzi?"
-- opțiuni = variantele de la Pas 2 (label: intenția, scurt; description: template + ofertă + esența;
-  prima are „(Recomandat)") + mereu „Notă, fără răspuns" + „Ignoră contactul".
-- `preview` pe FIECARE opțiune: blocurile 1 și 2 (ce a spus + citatul, tabelul „Cine e" ca listă
-  `câmp: valoare`), apoi o linie cu ce face opțiunea respectivă. E singurul loc unde utilizatorul
-  vede contextul, deci nu-l scurta.
+Ordinea în mesaj, fixă:
+1. Cele trei blocuri de la Pas 2, scrise în chat (tabelul inclus).
+2. Apoi încă un paragraf de text: 2-3 propoziții despre recomandare (de ce prima variantă, ce riști
+   cu celelalte). Claude Code comprimă ultimul text dinaintea unui tool call; paragraful ăsta îl
+   ia asupra lui, ca tabelul să rămână vizibil.
+3. Apoi AskUserQuestion: opțiuni = variantele de la Pas 2 (label: intenția; description: template +
+   ofertă + esența; prima cu „(Recomandat)") + mereu „Notă, fără răspuns" + „Ignoră contactul"
+   (max 4 opțiuni: dacă sunt 3 variante, „Ignoră" se alege la „Other"). Fără `preview`.
 Utilizatorul poate scrie propria intenție la „Other".
 
 ## Pas 4 — acțiunea
