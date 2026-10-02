@@ -44,10 +44,15 @@ după ce a întrebat el. Tipic:
 - nu e treaba noastră → `refuz-politicos` / opțiunea „Ignoră"
 Prima variantă e recomandarea ta, cu un motiv de 5-10 cuvinte.
 
-## Pas 3 — alegerea (AskUserQuestion, o singură întrebare per email)
+## Pas 3 — alegerea (în chat, NU AskUserQuestion)
 
-Opțiuni = variantele de la Pas 2 + mereu „Notă, fără răspuns" + „Ignoră contactul". Utilizatorul poate
-scrie propria intenție la „Other".
+Cele trei blocuri sunt ultimul mesaj din tură: după ele nu mai chemi niciun tool. Textul scris înaintea
+unui tool call (mai ales AskUserQuestion) e comprimat de Claude Code într-un rezumat de o linie, iar
+utilizatorul nu vede tabelul.
+
+Sub variante adaugi mereu `**N.** Notă, fără răspuns · **I.** Ignoră contactul`, apoi o linie:
+„Răspunde cu `1`, `2`, `3`, `N`, `I` sau scrie liber ce vrei." și te oprești. Răspunsul liber e o
+intenție proprie.
 
 ## Pas 4 — acțiunea
 
