@@ -1,6 +1,6 @@
 {
   "name": "wizard-email",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Sistem de email organizat pe contacte: citește Gmail, ține o fișă per contact, clasifică și pregătește răspunsuri și oferte în vocea firmei. Datele stau global în ~/wizard-email.",
   "author": { "name": "Silviu", "url": "https://github.com/silviu-life" },
   "repository": "https://github.com/silviu-life/wizard-email"
