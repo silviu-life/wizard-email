@@ -1,9 +1,11 @@
 ---
 name: mail-sync
-description: Citește Gmail și creează sau actualizează fișele din `contacte/<email>/` (profile.md + istoric.md). Folosește la `/mail sync [--zile N] [query]`, „citește inbox-ul", „cine mi-a scris", „adu emailurile", „sincronizează contactele", „importă tot istoricul de emailuri", sync inbox, pull emails, who emailed me. Ia doar corespondență reală, om-cu-om; sare peste advertising, marketing, newslettere, notificări. Nu clasifică (`mail-classify`), nu scrie drafturi (`mail-draft`), nu procesează (`mail-process`).
+description: Citește Gmail și creează sau actualizează fișele din `contacte/<email>/` (profile.md + istoric.md). Folosește la `/wizard-email:mail sync [--zile N] [query]`, „citește inbox-ul", „cine mi-a scris", „adu emailurile", „sincronizează contactele", „importă tot istoricul de emailuri", sync inbox, pull emails, who emailed me. Ia doar corespondență reală, om-cu-om; sare peste advertising, marketing, newslettere, notificări. Nu clasifică (`mail-classify`), nu scrie drafturi (`mail-draft`), nu procesează (`mail-process`).
 ---
 
-# /mail sync — inbox → contacte/
+# /wizard-email:mail sync — inbox → contacte/
+
+> **Înainte de orice:** citește `${CLAUDE_PLUGIN_ROOT}/skills/mail/reguli.md` — unde stau datele (`$DATA`) și regulile dure.
 
 Citește `reguli/schema.md` (secțiunile `profile.md` și `istoric.md`) înainte să scrii orice.
 Adresa proprie: din `firma/profil.md` („Email propriu"). Fără ea, oprește-te și cere-o.
@@ -70,10 +72,10 @@ Intrările se pun în ordine cronologică.
 
 ## Pas 5 — index și raport
 
-`python3 scripts/index.py`. Raport:
+`python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`. Raport:
 - contacte noi / actualizate / mesaje adăugate;
 - thread-uri sărite, pe motiv (expeditor / subiect / bcc / doar eu / corp);
-- „N contacte au `tip` gol → `/mail classify --toate`"; „M emailuri neprocesate → `/mail process`".
+- „N contacte au `tip` gol → `/wizard-email:mail classify --toate`"; „M emailuri neprocesate → `/wizard-email:mail process`".
 STOP.
 
 ## Ce NU faci

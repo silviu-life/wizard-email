@@ -1,9 +1,11 @@
 ---
 name: mail-process
-description: Procesează emailurile primite, unul câte unul — ce a spus contactul, contextul lui (fișă, istoric, stadiu, ofertă potrivită) și 2-4 variante de răspuns dintre care alegi; apoi predă la `mail-draft`. Folosește la `/mail process [<email> | --toate]`, „hai să-mi procesez emailurile", „ce am de răspuns", „ia-le pe rând", „ce a zis X și ce-i răspund", process my inbox, what did X say, triage replies. Nu citește Gmail direct (rulează `mail-sync` întâi), nu trimite.
+description: Procesează emailurile primite, unul câte unul — ce a spus contactul, contextul lui (fișă, istoric, stadiu, ofertă potrivită) și 2-4 variante de răspuns dintre care alegi; apoi predă la `mail-draft`. Folosește la `/wizard-email:mail process [<email> | --toate]`, „hai să-mi procesez emailurile", „ce am de răspuns", „ia-le pe rând", „ce a zis X și ce-i răspund", process my inbox, what did X say, triage replies. Nu citește Gmail direct (rulează `mail-sync` întâi), nu trimite.
 ---
 
-# /mail process — emailurile pe rând: ce a zis · cine e · ce-i răspund
+# /wizard-email:mail process — emailurile pe rând: ce a zis · cine e · ce-i răspund
+
+> **Înainte de orice:** citește `${CLAUDE_PLUGIN_ROOT}/skills/mail/reguli.md` — unde stau datele (`$DATA`) și regulile dure.
 
 **Regula de limbă, o dată:** vorbești română. Variantele de răspuns sunt idei, nu emailuri scrise;
 emailul îl scrie `mail-draft` după ce alegi.
@@ -49,7 +51,7 @@ scrie propria intenție la „Other".
 
 ## Pas 4 — acțiunea
 
-- Variantă de răspuns → aplică `.claude/skills/mail-draft/SKILL.md` cu intenția, template-ul și oferta
+- Variantă de răspuns → aplică `${CLAUDE_PLUGIN_ROOT}/skills/mail-draft/SKILL.md` cu intenția, template-ul și oferta
   alese (nu le realege). Draftul rezultat se arată integral. Nu trimiți.
 - „Notă, fără răspuns" → cere o linie, scrie în `istoric.md`: `## <azi> · procesat · notă: <text>`.
 - „Ignoră contactul" → `tip: ignora` în profil, `## <azi> · procesat · ignorat`.
@@ -58,5 +60,5 @@ propusă la Pas 2, adaugă și `## <azi> · clasificat · ...`.
 
 ## Pas 5 — următorul
 
-`python3 scripts/index.py`, apoi treci la următorul email din coadă. Între emailuri nu întrebi „continui?";
+`python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`, apoi treci la următorul email din coadă. Între emailuri nu întrebi „continui?";
 utilizatorul oprește când vrea. La final: tabel contact | decizie | draft:<id> sau —. STOP.

@@ -1,0 +1,12 @@
+{
+  "name": "wizard-email",
+  "description": "Pluginul wizard-email: email organizat pe contacte, cu Gmail.",
+  "owner": { "name": "Silviu", "url": "https://github.com/silviu-life" },
+  "plugins": [
+    {
+      "name": "wizard-email",
+      "source": "./",
+      "description": "Sistem de email organizat pe contacte, cu Gmail: sync, clasificare, drafturi, trimitere cu confirmare."
+    }
+  ]
+}

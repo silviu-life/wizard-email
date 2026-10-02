@@ -1,9 +1,11 @@
 ---
 name: mail-classify
-description: Completează fișa unui contact — tip relație, segment, stadiu, personalitate, ce vrea — din istoricul emailurilor și `reguli/segmente.md`. Folosește la `/mail classify <email>` sau `/mail classify --toate`, „clasifică contactele", „ce fel de client e X", „pune-l pe X în segment", classify contacts, tag contact, what segment is X. Nu citește Gmail (asta e `mail-sync`), nu scrie emailuri.
+description: Completează fișa unui contact — tip relație, segment, stadiu, personalitate, ce vrea — din istoricul emailurilor și `reguli/segmente.md`. Folosește la `/wizard-email:mail classify <email>` sau `/wizard-email:mail classify --toate`, „clasifică contactele", „ce fel de client e X", „pune-l pe X în segment", classify contacts, tag contact, what segment is X. Nu citește Gmail (asta e `mail-sync`), nu scrie emailuri.
 ---
 
-# /mail classify — tip · segment · stadiu · personalitate
+# /wizard-email:mail classify — tip · segment · stadiu · personalitate
+
+> **Înainte de orice:** citește `${CLAUDE_PLUGIN_ROOT}/skills/mail/reguli.md` — unde stau datele (`$DATA`) și regulile dure.
 
 Citește întâi, nu recita: `reguli/schema.md` (valorile permise), `reguli/segmente.md` (semnalele),
 `firma/profil.md` (ca să știi ce vindem). Apoi, per contact, `profile.md` + `istoric.md` complet.
@@ -46,4 +48,4 @@ Adaugă în `istoric.md`:
 ## <azi> · clasificat · tip:<tip> segment:<segment> stadiu:<stadiu>
 <dovezile, o linie>
 ```
-`python3 scripts/index.py`. Raport: tabel contact | tip | segment | stadiu | încredere. STOP.
+`python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`. Raport: tabel contact | tip | segment | stadiu | încredere. STOP.

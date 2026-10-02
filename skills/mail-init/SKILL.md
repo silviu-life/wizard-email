@@ -1,9 +1,11 @@
 ---
 name: mail-init
-description: Inițializează sau actualizează datele firmei pentru sistemul de email — `firma/` (profil, voce, dovezi, obiecții), `oferte/`, `reguli/segmente.md`, `reguli/schema.md` și biblioteca `templates/`. Folosește la `/mail init`, „configurează sistemul de email", „pune datele firmei", „importă ofertele din documentele mele", „adaugă o ofertă nouă", set up email system, import offers. Din surse date de utilizator (foldere, fișiere, URL-uri) sau prin interviu. Nu citește inbox-ul (asta e `mail-sync`).
+description: Inițializează sau actualizează datele firmei pentru sistemul de email — `firma/` (profil, voce, dovezi, obiecții), `oferte/`, `reguli/segmente.md`, `reguli/schema.md` și biblioteca `templates/`. Folosește la `/wizard-email:mail init`, „configurează sistemul de email", „pune datele firmei", „importă ofertele din documentele mele", „adaugă o ofertă nouă", set up email system, import offers. Din surse date de utilizator (foldere, fișiere, URL-uri) sau prin interviu. Nu citește inbox-ul (asta e `mail-sync`).
 ---
 
-# /mail init — datele firmei
+# /wizard-email:mail init — datele firmei
+
+> **Înainte de orice:** citește `${CLAUDE_PLUGIN_ROOT}/skills/mail/reguli.md` — unde stau datele (`$DATA`) și regulile dure.
 
 Scrii fișierele pe care le citesc toate celelalte skill-uri. Formatul exact e în `assets/SCHEMA.md`.
 Exemplele de formă sunt în `assets/exemple/`. Citește-le, nu le recita.
@@ -71,9 +73,9 @@ O întrebare pe mesaj, în ordinea asta. Răspunsurile intră direct în fișier
 
 ## Pas 4 — template-urile și schema
 
-- `cp -rn .claude/skills/mail-init/assets/templates/. templates/` — copiază DOAR ce lipsește. Ce a
+- `cp -rn "${CLAUDE_PLUGIN_ROOT}/skills/mail-init/assets/templates/." "$DATA/templates/"` — copiază DOAR ce lipsește. Ce a
   modificat utilizatorul rămâne neatins.
-- `cp -n .claude/skills/mail-init/assets/SCHEMA.md reguli/schema.md`.
+- `cp -n "${CLAUDE_PLUGIN_ROOT}/skills/mail-init/assets/SCHEMA.md" "$DATA/reguli/schema.md"`.
 
 ## Pas 5 — rezumat și confirmare, ÎNAINTE de Write
 
@@ -83,5 +85,5 @@ template-uri copiate. În mod actualizare, arată diff-ul pe fiecare fișier exi
 
 ## Pas 6 — index și oprire
 
-`python3 scripts/index.py`. Raportează exit code-ul și problemele, dacă sunt. Scrie `oferte/_catalog.md`
+`python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`. Raportează exit code-ul și problemele, dacă sunt. Scrie `oferte/_catalog.md`
 (tabel `id | nume | preț | segmente țintă | activ`) din frontmatter-ele ofertelor. STOP.

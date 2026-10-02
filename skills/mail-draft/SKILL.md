@@ -1,9 +1,11 @@
 ---
 name: mail-draft
-description: Scrie un răspuns sau o ofertă personalizată pentru un contact, ca Draft în Gmail, din template-urile din `templates/` și ofertele din `oferte/`. Folosește la `/mail draft <email|thread-id> [intenție]`, „răspunde-i lui X", „scrie-i o ofertă lui X", „pregătește un răspuns", „fă un draft", reply to X, draft an offer, write back. NU trimite niciodată — trimiterea e `/mail send`. Pentru mai multe contacte deodată, `mail-campaign`.
+description: Scrie un răspuns sau o ofertă personalizată pentru un contact, ca Draft în Gmail, din template-urile din `templates/` și ofertele din `oferte/`. Folosește la `/wizard-email:mail draft <email|thread-id> [intenție]`, „răspunde-i lui X", „scrie-i o ofertă lui X", „pregătește un răspuns", „fă un draft", reply to X, draft an offer, write back. NU trimite niciodată — trimiterea e `/wizard-email:mail send`. Pentru mai multe contacte deodată, `mail-campaign`.
 ---
 
-# /mail draft — un email, un contact, un Draft în Gmail
+# /wizard-email:mail draft — un email, un contact, un Draft în Gmail
+
+> **Înainte de orice:** citește `${CLAUDE_PLUGIN_ROOT}/skills/mail/reguli.md` — unde stau datele (`$DATA`) și regulile dure.
 
 **Regula de limbă, o dată:** emailul e în română cu diacritice, în vocea din `firma/voce.md`.
 **Regula dură:** nu apelezi niciodată `send_message` sau `reply`. Doar `create_draft`.
@@ -49,6 +51,6 @@ Ia `id`-ul draftului din răspuns.
 ## <azi> · draft · <intenție, 3-6 cuvinte> · draft:<id> · template:<id> [· oferta:<id>]
 ```
 `profile.md`: `urmatorul_pas: "trimite draft <id>"`, `actualizat` = azi. `stadiu` NU se schimbă (se schimbă la send).
-`python3 scripts/index.py`.
+`python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`.
 Raport: contact, template ales, ofertă aleasă, subiect, corpul complet al draftului, `draft:<id>`, și
-propoziția „Trimit cu `/mail send <email>`". STOP.
+propoziția „Trimit cu `/wizard-email:mail send <email>`". STOP.

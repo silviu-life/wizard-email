@@ -1,9 +1,11 @@
 ---
 name: mail-campaign
-description: Outbound — filtrează contactele după tip / segment / stadiu și pregătește un draft personalizat pentru fiecare, dintr-o ofertă sau un template. Folosește la `/mail campaign <filtru> oferta=<id>|template=<id>`, „trimite oferta X la toți clienții", „campanie pe segmentul Y", „scrie tuturor leadurilor", email campaign, bulk offer, send to all. Produce doar drafturi; nimic nu pleacă fără `/mail send` per contact.
+description: Outbound — filtrează contactele după tip / segment / stadiu și pregătește un draft personalizat pentru fiecare, dintr-o ofertă sau un template. Folosește la `/wizard-email:mail campaign <filtru> oferta=<id>|template=<id>`, „trimite oferta X la toți clienții", „campanie pe segmentul Y", „scrie tuturor leadurilor", email campaign, bulk offer, send to all. Produce doar drafturi; nimic nu pleacă fără `/wizard-email:mail send` per contact.
 ---
 
-# /mail campaign — drafturi în serie
+# /wizard-email:mail campaign — drafturi în serie
+
+> **Înainte de orice:** citește `${CLAUDE_PLUGIN_ROOT}/skills/mail/reguli.md` — unde stau datele (`$DATA`) și regulile dure.
 
 ## Pas 1 — filtrul
 
@@ -18,7 +20,7 @@ Da / Nu / „Scot pe cineva". Nu → STOP.
 
 ## Pas 3 — per contact
 
-Aplică pașii 1-4 din `.claude/skills/mail-draft/SKILL.md`, cu:
+Aplică pașii 1-4 din `${CLAUDE_PLUGIN_ROOT}/skills/mail-draft/SKILL.md`, cu:
 - oferta fixată la `oferta=<id>` (sau, dacă s-a dat `template=`, oferta după regulile din mail-draft);
 - template-ul fixat la `template=<id>` (sau, dacă s-a dat `oferta=`, ales din `templates/_catalog.md`
   după segment + stadiu, preferând `marketing/` pentru contacte fără istoric de discuție și `discutii/`
@@ -29,4 +31,4 @@ Contact cu `segment` gol → sare peste el și îl listează la final („de cla
 ## Pas 4 — raport
 
 Tabel: contact | template | ofertă | draft:<id>. Plus lista celor săriți și de ce.
-„Trimiterea se face per contact cu `/mail send <email>`." Zero apeluri de trimitere. STOP.
+„Trimiterea se face per contact cu `/wizard-email:mail send <email>`." Zero apeluri de trimitere. STOP.

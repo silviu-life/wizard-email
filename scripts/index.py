@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 """Generează contacte/_index.md și templates/_catalog.md din frontmatter-e și validează după SCHEMA.md.
 
-Folosire:  python3 scripts/index.py [--root DIR]   (default: folderul proiectului)
+Folosire:  python3 scripts/index.py [--root DIR]   (default: folderul de date, vezi --where)
+           python3 scripts/index.py --where         (afișează folderul de date)
+           python3 scripts/index.py --setup         (creează folderul de date + permisiunea în Claude Code)
            python3 scripts/index.py --check         (self-check pe assets-urile din mail-init)
 Exit 1 dacă există probleme de validare (câmp obligatoriu lipsă sau valoare nepermisă).
 """
-import re, sys, shutil, tempfile
+import json, os, re, sys, shutil, tempfile
 from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")  # Windows: consola implicită e cp1252 și cade la ⚠/ă
 
-ROOT = Path(__file__).resolve().parent.parent
-ASSETS = ROOT / ".claude/skills/mail-init/assets"
+PLUGIN = Path(__file__).resolve().parent.parent
+ASSETS = PLUGIN / "skills/mail-init/assets"
+# Datele stau global, în afara pluginului (pluginul se suprascrie la update): ~/wizard-email pe toate OS-urile.
+DATA = Path(os.environ.get("WIZARD_EMAIL_HOME") or Path.home() / "wizard-email").expanduser().resolve()
+SETTINGS = Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude") / "settings.json"
 
 # Regulile de validare. Sursa umană e assets/SCHEMA.md; ținem-le sincronizate manual.
 # ponytail: reguli hardcodate; parsăm SCHEMA.md dacă apar >2 tipuri noi de fișiere.
@@ -123,6 +128,24 @@ def problems_section(problems):
     return "\n".join(out)
 
 
+def setup(data, settings):
+    """Creează folderul de date și îl adaugă în permissions.additionalDirectories. Idempotent.
+    Nu suprascrie un settings.json pe care nu-l poate citi."""
+    data.mkdir(parents=True, exist_ok=True)
+    cfg = {}
+    if settings.exists():
+        try:
+            cfg = json.loads(settings.read_text(encoding="utf-8") or "{}")
+        except ValueError as e:
+            sys.exit(f"{settings} nu e JSON valid ({e}). Repară-l, apoi rulează din nou --setup.")
+    dirs = cfg.setdefault("permissions", {}).setdefault("additionalDirectories", [])
+    if str(data) not in dirs:
+        dirs.append(str(data))
+        settings.parent.mkdir(parents=True, exist_ok=True)
+        settings.write_text(json.dumps(cfg, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return data
+
+
 def check():
     """Self-check: rulează pe assets într-un folder temporar; nimic din assets nu e modificat."""
     with tempfile.TemporaryDirectory() as td:
@@ -138,6 +161,13 @@ def check():
         assert bad == {("sursa", "obligatoriu,"), ("stadiu", "valoare")}, bad
         assert not [p for p in problems if "incomplet@test.ro" not in p[0]], problems
         assert t >= 77 and "| marketing/01_customer_acquisition/cold_outreach/01_problem_solver |" in cat
+        s = tmp / "cfg/settings.json"
+        s.parent.mkdir()
+        s.write_text('{"model": "x", "permissions": {"allow": ["Bash"]}}', encoding="utf-8")
+        setup(tmp / "date", s); setup(tmp / "date", s)
+        cfg = json.loads(s.read_text(encoding="utf-8"))
+        assert (tmp / "date").is_dir() and cfg["model"] == "x" and cfg["permissions"]["allow"] == ["Bash"], cfg
+        assert cfg["permissions"]["additionalDirectories"] == [str(tmp / "date")], cfg
         print(f"OK: {n} contacte, {t} template-uri, {len(problems)} probleme (toate din fixture-ul incomplet)")
 
 
@@ -146,7 +176,13 @@ if __name__ == "__main__":
     if "--check" in args:
         check()
         sys.exit(0)
-    root = Path(args[args.index("--root") + 1]) if "--root" in args else ROOT
+    if "--where" in args:
+        print(DATA)
+        sys.exit(0)
+    if "--setup" in args:
+        print(setup(DATA, SETTINGS))
+        sys.exit(0)
+    root = Path(args[args.index("--root") + 1]) if "--root" in args else DATA
     n, t, problems = build(root)
     print(f"contacte: {n} · template-uri: {t} · probleme: {len(problems)}")
     for rel, k, msg in problems:
