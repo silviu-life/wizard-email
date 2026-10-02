@@ -53,4 +53,4 @@ Ia `id`-ul draftului din răspuns.
 `profile.md`: `urmatorul_pas: "trimite draft <id>"`, `actualizat` = azi. `stadiu` NU se schimbă (se schimbă la send).
 `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`.
 Raport: contact, template ales, ofertă aleasă, subiect, corpul complet al draftului, `draft:<id>`, și
-propoziția „Trimit cu `/wizard-email:mail send <email>`". STOP.
+propoziția „Rămâne draft în Gmail. Trimiți toate drafturile la final cu `/wizard-email:mail send`." STOP.

@@ -17,7 +17,7 @@ Un skill = un verb. Tu doar rutezi.
 | `/wizard-email:mail process [<email> \| --toate]` | emailurile pe rând: ce a zis, cine e, variante de răspuns | `mail-process` |
 | `/wizard-email:mail classify <email> \| --toate` | completează tip / segment / stadiu / personalitate | `mail-classify` |
 | `/wizard-email:mail draft <email\|thread> [intenție]` | scrie un răspuns sau o ofertă ca Draft în Gmail | `mail-draft` |
-| `/wizard-email:mail send <draft-id\|email>` | trimite un draft existent, după confirmare | `mail-send` |
+| `/wizard-email:mail send [<draft-id\|email>]` | fără argument: trimite în lot toate drafturile netrimise, după o confirmare | `mail-send` |
 | `/wizard-email:mail followup [--zile N] [--draft]` | cine n-a răspuns de N zile | `mail-followup` |
 | `/wizard-email:mail campaign <filtru> oferta=<id>\|template=<id>` | drafturi în serie pe un segment | `mail-campaign` |
 

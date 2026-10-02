@@ -61,4 +61,12 @@ propusă la Pas 2, adaugă și `## <azi> · clasificat · ...`.
 ## Pas 5 — următorul
 
 `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`, apoi treci la următorul email din coadă. Între emailuri nu întrebi „continui?";
-utilizatorul oprește când vrea. La final: tabel contact | decizie | draft:<id> sau —. STOP.
+utilizatorul oprește când vrea.
+
+## Pas 6 — final (coada golită SAU utilizatorul s-a oprit)
+
+Tabel contact | decizie | draft:<id> sau —. Dacă s-a creat cel puțin un draft, ultima linie e obligatoriu:
+
+> N drafturi în Gmail, nimic n-a plecat. Le trimiți pe toate cu `/wizard-email:mail send`
+
+Fără drafturi → „Niciun draft creat." STOP.

@@ -1,6 +1,6 @@
 ---
 name: mail-campaign
-description: Outbound — filtrează contactele după tip / segment / stadiu și pregătește un draft personalizat pentru fiecare, dintr-o ofertă sau un template. Folosește la `/wizard-email:mail campaign <filtru> oferta=<id>|template=<id>`, „trimite oferta X la toți clienții", „campanie pe segmentul Y", „scrie tuturor leadurilor", email campaign, bulk offer, send to all. Produce doar drafturi; nimic nu pleacă fără `/wizard-email:mail send` per contact.
+description: Outbound — filtrează contactele după tip / segment / stadiu și pregătește un draft personalizat pentru fiecare, dintr-o ofertă sau un template. Folosește la `/wizard-email:mail campaign <filtru> oferta=<id>|template=<id>`, „trimite oferta X la toți clienții", „campanie pe segmentul Y", „scrie tuturor leadurilor", email campaign, bulk offer, send to all. Produce doar drafturi; nimic nu pleacă fără `/wizard-email:mail send` (care le trimite în lot, după confirmare).
 ---
 
 # /wizard-email:mail campaign — drafturi în serie
@@ -31,4 +31,4 @@ Contact cu `segment` gol → sare peste el și îl listează la final („de cla
 ## Pas 4 — raport
 
 Tabel: contact | template | ofertă | draft:<id>. Plus lista celor săriți și de ce.
-„Trimiterea se face per contact cu `/wizard-email:mail send <email>`." Zero apeluri de trimitere. STOP.
+„Le trimiți pe toate cu `/wizard-email:mail send` (sau unul cu `/wizard-email:mail send <email>`)." Zero apeluri de trimitere. STOP.

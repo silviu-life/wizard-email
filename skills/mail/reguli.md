@@ -18,7 +18,7 @@ Toate căile din skill-uri (`firma/`, `oferte/`, `reguli/`, `templates/`, `conta
 - `contacte/_index.md`, `templates/_catalog.md` sunt GENERATE de `index.py`. Nu se editează de mână.
 
 ## Reguli dure
-1. Emailul pleacă DOAR prin `/wizard-email:mail send`, după confirmare explicită. Niciun alt skill nu apelează `send_message` sau `reply`.
+1. Implicit se fac doar drafturi în Gmail. Emailul pleacă DOAR prin `/wizard-email:mail send` (rulat la final, trimite în lot toate drafturile netrimise), după confirmare explicită. Niciun alt skill nu apelează `send_message` sau `reply`.
 2. Orice acțiune pe un contact lasă o linie în `contacte/<email>/istoric.md` (format în `reguli/schema.md`).
 3. Câmp necunoscut = gol. Nu se inventează valori. Ce e dedus se marchează `[DEDUS]`, ce a spus contactul explicit `[DOCUMENTAT]`.
 4. După orice scriere în `contacte/` sau `templates/` se rulează `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/index.py"`.
